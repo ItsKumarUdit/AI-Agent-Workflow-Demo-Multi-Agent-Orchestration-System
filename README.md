@@ -1,287 +1,150 @@
-# 🤖 AI Agent Workflow Demo – Multi-Agent Orchestration System
+AI Agent Workflow Demo – Multi-Agent Orchestration System
 
+A lightweight multi-agent orchestration system where specialized AI agents collaborate sequentially to complete complex tasks. Built using LangChain, FastAPI, and a React.js dashboard.
 
-A **lightweight multi-agent orchestration system** where specialized AI agents collaborate sequentially to complete complex enterprise-style tasks. Built with **LangChain**, **FastAPI**, and a **React.js** real-time dashboard.
+Overview
 
----
+This project demonstrates a multi-agent pipeline in which different AI agents handle specific responsibilities and pass results to the next stage.
 
-## 🧠 Overview
-
-This project simulates an enterprise-grade agentic pipeline where three specialized agents hand off context to each other:
-
-| Agent | Role |
-|---|---|
-| 🔍 **Research Agent** | Queries structured data sources (CRM/ERP-style) using OpenAI function-calling |
-| 📝 **Summarization Agent** | Condenses raw research output into structured summaries |
-| 📤 **Output Formatting Agent** | Formats the final response into clean JSON or markdown for downstream use |
-
----
-
-## ✨ Features
-
-- ✅ Sequential multi-agent pipeline with full **state tracking per session**
-- ✅ **Inter-agent communication** via structured JSON tool calls and prompt chaining
-- ✅ **OpenAI function-calling API** for structured tool-use by agents
-- ✅ **FastAPI** backend exposing RESTful agent pipeline endpoints
-- ✅ **React.js dashboard** with real-time step-by-step execution visibility
-- ✅ Live monitoring of agent decisions and intermediate outputs
-- ✅ Enterprise automation simulation (CRM/ERP query workflows)
-- ✅ Session-level context management and handoff tracking
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    React.js Dashboard                   │
-│         (Real-time agent step visibility)               │
-└────────────────────────┬────────────────────────────────┘
-                         │ HTTP / WebSocket
-┌────────────────────────▼────────────────────────────────┐
-│                  FastAPI Backend                        │
-│              (Agent Pipeline Router)                    │
-└──────────┬─────────────┬──────────────┬────────────────┘
-           │             │              │
-    ┌──────▼──────┐ ┌───▼──────┐ ┌────▼──────────┐
-    │  Research   │ │ Summary  │ │    Output     │
-    │   Agent     │→│  Agent   │→│  Formatter    │
-    │(LangChain + │ │(LangChain│ │   Agent       │
-    │  OpenAI FC) │ │  Chain)  │ │  (JSON/MD)    │
-    └─────────────┘ └──────────┘ └───────────────┘
-           │
-    ┌──────▼──────┐
-    │  OpenAI     │
-    │  Function   │
-    │  Calling    │
-    └─────────────┘
-```
-
----
-
-## 📁 Project Structure
-
-```
+Agents
+Research Agent
+Retrieves structured data using OpenAI function calling.
+Summarization Agent
+Processes raw data and generates concise summaries.
+Formatting Agent
+Converts output into structured JSON or readable format.
+Features
+Sequential multi-agent pipeline
+Inter-agent communication using structured data
+OpenAI function-calling integration
+FastAPI backend with REST APIs
+React.js frontend dashboard
+Real-time execution tracking
+Session-based state management
+Architecture
+User Input
+   ↓
+Research Agent
+   ↓
+Summarization Agent
+   ↓
+Formatting Agent
+   ↓
+Final Output
+Project Structure
 AI-Agent-Workflow-Demo-Multi-Agent-Orchestration-System/
-│
-├── backend/
-│   ├── main.py                    # FastAPI app entry point
-│   ├── orchestrator.py            # Agent pipeline orchestrator
-│   ├── agents/
-│   │   ├── __init__.py
-│   │   ├── research_agent.py      # Research agent with OpenAI function-calling
-│   │   ├── summarization_agent.py # Summarization agent
-│   │   └── formatting_agent.py    # Output formatting agent
-│   ├── schemas/
-│   │   ├── __init__.py
-│   │   └── models.py              # Pydantic request/response models
-│   ├── tools/
-│   │   ├── __init__.py
-│   │   └── crm_tools.py           # Simulated CRM/ERP tool definitions
-│   └── session/
-│       ├── __init__.py
-│       └── state_manager.py       # Per-session state tracking
-│
-├── frontend/
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── App.jsx                # Root component
-│   │   ├── index.js
-│   │   ├── components/
-│   │   │   ├── AgentPipeline.jsx  # Pipeline visualization
-│   │   │   ├── AgentStep.jsx      # Individual agent step card
-│   │   │   ├── TaskInput.jsx      # Task submission form
-│   │   │   └── OutputPanel.jsx    # Final output display
-│   │   ├── services/
-│   │   │   └── api.js             # API service layer
-│   │   └── styles/
-│   │       └── App.css
-│   ├── package.json
-│   └── .env.example
-│
-├── requirements.txt
-├── .gitignore
-├── .env.example
-├── docker-compose.yml
-└── README.md
-```
 
----
+backend/
+  main.py
+  orchestrator.py
+  agents/
+    research_agent.py
+    summarization_agent.py
+    formatting_agent.py
+  schemas/
+    models.py
+  tools/
+    crm_tools.py
+  session/
+    state_manager.py
 
-## 🚀 Getting Started
+frontend/
+  public/
+    index.html
+  src/
+    App.jsx
+    index.js
+    components/
+    services/
+    styles/
 
-### Prerequisites
-
-- Python 3.10+
-- Node.js 18+
-- OpenAI API Key
-
-### Backend Setup
-
-```bash
-# Clone the repo
+requirements.txt
+docker-compose.yml
+README.md
+Getting Started
+Prerequisites
+Python 3.10+
+Node.js 18+
+OpenAI API Key
+Backend Setup
 git clone https://github.com/ItsKumarUdit/AI-Agent-Workflow-Demo-Multi-Agent-Orchestration-System.git
 cd AI-Agent-Workflow-Demo-Multi-Agent-Orchestration-System
 
-# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate        # Windows: venv\Scripts\activate
 
-# Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables
 cp .env.example .env
-# Add your OPENAI_API_KEY to .env
+# Add your OPENAI_API_KEY in .env
 
-# Run the FastAPI server
 uvicorn backend.main:app --reload --port 8000
-```
-
-### Frontend Setup
-
-```bash
+Frontend Setup
 cd frontend
 npm install
 npm start
-# Visit http://localhost:3000
-```
 
-### Docker (Optional)
+Open: http://localhost:3000
 
-```bash
+Docker Setup (Optional)
 docker-compose up --build
-```
-
----
-
-## 🔌 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/run` | Start a new agent pipeline task |
-| `GET` | `/api/session/{session_id}` | Get session state and step outputs |
-| `GET` | `/api/sessions` | List all active sessions |
-| `DELETE` | `/api/session/{session_id}` | Clear a session |
-| `GET` | `/health` | Health check |
-
-### Example Request
-
-```json
+API Endpoints
+Method	Endpoint	Description
+POST	/api/run	Start a new pipeline task
+GET	/api/session/{session_id}	Get session details
+GET	/api/sessions	List all sessions
+DELETE	/api/session/{session_id}	Delete a session
+GET	/health	Health check
+Example Request
 POST /api/run
 {
-  "task": "Find top 5 customers by revenue in Q1 2024 and summarize their purchase patterns",
+  "task": "Find top 5 customers by revenue in Q1 2024",
   "session_id": "session_001"
 }
-```
-
-### Example Response
-
-```json
+Example Response
 {
   "session_id": "session_001",
   "status": "completed",
   "steps": [
     {
       "agent": "ResearchAgent",
-      "status": "done",
-      "output": { "customers": [...] },
-      "tool_calls": ["query_crm_revenue"]
+      "status": "done"
     },
     {
       "agent": "SummarizationAgent",
-      "status": "done",
-      "output": "Top customers are..."
+      "status": "done"
     },
     {
       "agent": "FormattingAgent",
-      "status": "done",
-      "output": { "formatted": "..." }
+      "status": "done"
     }
-  ],
-  "final_output": { ... }
+  ]
 }
-```
-
----
-
-## 🧩 Agent Details
-
-### 🔍 Research Agent
-- Uses **OpenAI function-calling** to invoke simulated CRM/ERP tools
-- Tools: `query_crm_revenue`, `query_erp_inventory`, `get_customer_profile`
-- Returns structured JSON data for downstream agents
-
-### 📝 Summarization Agent
-- Receives research output via **prompt chaining**
-- Uses LangChain `LLMChain` with a summarization prompt template
-- Produces concise, structured summaries
-
-### 📤 Output Formatting Agent
-- Final stage of the pipeline
-- Formats data into clean JSON or Markdown
-- Adds metadata: timestamps, session ID, confidence scores
-
----
-
-## 🔧 Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Backend Framework | FastAPI |
-| Agent Framework | LangChain |
-| LLM Provider | OpenAI (GPT-4 / GPT-3.5) |
-| Function Calling | OpenAI Function-Calling API |
-| State Management | In-memory session store |
-| Frontend | React.js 18 |
-| Styling | CSS Modules / Tailwind |
-| API Communication | Axios + REST |
-| Containerization | Docker + Docker Compose |
-
----
-
-## 🖥️ Dashboard Preview
-
-The React dashboard provides:
-- **Task input form** to submit enterprise queries
-- **Live agent step cards** showing each agent's status (pending → running → done)
-- **Intermediate output viewer** for each agent step
-- **Final output panel** with formatted results
-- **Session history** sidebar
-
----
-
-## 📝 Environment Variables
-
-```env
-# Backend .env
-OPENAI_API_KEY=your_openai_api_key_here
+Use Cases
+CRM data analysis
+ERP automation workflows
+Multi-step AI pipelines
+Business intelligence systems
+Tech Stack
+Backend: FastAPI
+AI Framework: LangChain
+LLM: OpenAI (GPT-4 / GPT-3.5)
+Frontend: React.js
+API: REST
+Containerization: Docker
+Environment Variables
+Backend (.env)
+OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-4
 APP_ENV=development
 CORS_ORIGINS=http://localhost:3000
-
-# Frontend .env
+Frontend (.env)
 REACT_APP_API_URL=http://localhost:8000
-```
+License
 
----
+MIT License
 
-## 🤝 Use Cases
+Author
 
-- Enterprise CRM data querying and summarization
-- Automated ERP report generation
-- Multi-step research pipelines
-- AI-powered business intelligence workflows
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-
----
-
-## 👤 Author
-
-**Udit Raj Kumar** – [@ItsKumarUdit](https://github.com/ItsKumarUdit)
+Udit Raj Kumar
+https://github.com/ItsKumarUdit
