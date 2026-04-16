@@ -21,7 +21,8 @@ FastAPI backend with REST APIs
 React.js frontend dashboard
 Real-time execution tracking
 Session-based state management
-Architecture
+
+Architecture:
 User Input
    ↓
 Research Agent
@@ -31,7 +32,8 @@ Summarization Agent
 Formatting Agent
    ↓
 Final Output
-Project Structure
+
+Project Structure:
 AI-Agent-Workflow-Demo-Multi-Agent-Orchestration-System/
 
 backend/
@@ -61,12 +63,14 @@ frontend/
 requirements.txt
 docker-compose.yml
 README.md
+
 Getting Started
 Prerequisites
 Python 3.10+
 Node.js 18+
 OpenAI API Key
-Backend Setup
+
+Backend Setup:
 git clone https://github.com/ItsKumarUdit/AI-Agent-Workflow-Demo-Multi-Agent-Orchestration-System.git
 cd AI-Agent-Workflow-Demo-Multi-Agent-Orchestration-System
 
@@ -79,29 +83,28 @@ cp .env.example .env
 # Add your OPENAI_API_KEY in .env
 
 uvicorn backend.main:app --reload --port 8000
-Frontend Setup
+
+Frontend Setup:
 cd frontend
 npm install
 npm start
 
-Open: http://localhost:3000
+| Method | Endpoint                  | Description               |
+| ------ | ------------------------- | ------------------------- |
+| POST   | /api/run                  | Start a new pipeline task |
+| GET    | /api/session/{session_id} | Get session details       |
+| GET    | /api/sessions             | List all sessions         |
+| DELETE | /api/session/{session_id} | Delete a session          |
+| GET    | /health                   | Health check              |
 
-Docker Setup (Optional)
-docker-compose up --build
-API Endpoints
-Method	Endpoint	Description
-POST	/api/run	Start a new pipeline task
-GET	/api/session/{session_id}	Get session details
-GET	/api/sessions	List all sessions
-DELETE	/api/session/{session_id}	Delete a session
-GET	/health	Health check
-Example Request
+Example Request:
 POST /api/run
 {
   "task": "Find top 5 customers by revenue in Q1 2024",
   "session_id": "session_001"
 }
-Example Response
+
+Example Response:
 {
   "session_id": "session_001",
   "status": "completed",
@@ -120,6 +123,7 @@ Example Response
     }
   ]
 }
+
 Use Cases
 CRM data analysis
 ERP automation workflows
@@ -132,19 +136,18 @@ LLM: OpenAI (GPT-4 / GPT-3.5)
 Frontend: React.js
 API: REST
 Containerization: Docker
+
 Environment Variables
 Backend (.env)
 OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-4
 APP_ENV=development
 CORS_ORIGINS=http://localhost:3000
-Frontend (.env)
+
+Frontend (.env):
 REACT_APP_API_URL=http://localhost:8000
-License
 
-MIT License
+License: MIT License
 
-Author
-
-Udit Raj Kumar
+Author:Udit Raj Kumar
 https://github.com/ItsKumarUdit
