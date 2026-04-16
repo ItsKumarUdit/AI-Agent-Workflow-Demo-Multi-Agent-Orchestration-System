@@ -1,11 +1,5 @@
 # 🤖 AI Agent Workflow Demo – Multi-Agent Orchestration System
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-green?style=flat-square&logo=fastapi)
-![LangChain](https://img.shields.io/badge/LangChain-0.1+-yellow?style=flat-square)
-![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react)
-![OpenAI](https://img.shields.io/badge/OpenAI-Function--Calling-412991?style=flat-square&logo=openai)
-![License](https://img.shields.io/badge/License-MIT-red?style=flat-square)
 
 A **lightweight multi-agent orchestration system** where specialized AI agents collaborate sequentially to complete complex enterprise-style tasks. Built with **LangChain**, **FastAPI**, and a **React.js** real-time dashboard.
 
